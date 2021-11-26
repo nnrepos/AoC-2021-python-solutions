@@ -1,6 +1,6 @@
-import utils
+from utils.utils import get_input, mandist
 
-input_text = utils.get_input(__file__)
+input_text = get_input(__file__)
 
 
 def part1():
