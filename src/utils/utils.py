@@ -4,6 +4,7 @@ from pathlib import Path
 
 YEAR = 2021
 ADVENT = f"https://adventofcode.com/{YEAR}/day/"
+# don't use my cookie please :)
 COOKIE = {'session': "53616c7465645f5faaedd30018cec333e9754a89e806920b830d770708830b9bba8ea85d3c33e9d567d6bef840fe0ce7"}
 INPUTS_FILE = "inputs.json"
 HTML_OK = 200
@@ -40,11 +41,19 @@ def get_input(filename: str):
                     f.write(json.dumps(inputs_dict))
                 return resp.text
             elif resp.status_code == 404:
-                print("page not found")
+                raise ConnectionError("page not found")
             else:
-                print("unknown error")
+                raise ConnectionError("unknown error")
     else:
         print("creating new input json file")
         with open(json_file, "w") as f:
             f.write(json.dumps(dict()))
         return get_input(filename)
+
+
+def lines_to_nums(lines):
+    try:
+        return [int(x) for x in lines.splitlines()]
+    except ValueError:
+        print("lines_to_nums failed")
+        return None
