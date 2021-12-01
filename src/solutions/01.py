@@ -1,6 +1,6 @@
 from utils.utils import *
 
-lines = get_input(__file__) + "hi"
+lines = get_input(__file__)
 numlines = lines_to_nums(lines)
 
 
