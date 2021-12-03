@@ -1,7 +1,7 @@
 from utils.utils import *
 
 lines = get_input(__file__)
-numlines = lines_to_nums(lines)
+lines_as_nums = lines_to_nums(lines)
 
 
 def part1(nums):
@@ -16,11 +16,11 @@ def part1(nums):
 
 def part2():
     nums = []
-    for i in range(len(numlines)):
-        if i < len(numlines) - 2:
-            nums.append(numlines[i] + numlines[i + 1] + numlines[i + 2])
+    for i in range(len(lines_as_nums)):
+        if i < len(lines_as_nums) - 2:
+            nums.append(lines_as_nums[i] + lines_as_nums[i + 1] + lines_as_nums[i + 2])
     return part1(nums)
 
 
-print("part1:", part1(numlines))
+print("part1:", part1(lines_as_nums))
 print("part2:", part2())

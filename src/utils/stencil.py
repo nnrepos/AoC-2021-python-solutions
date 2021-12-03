@@ -2,7 +2,7 @@ from utils.utils import *
 
 lines = get_input(__file__)
 slines = lines.splitlines()
-numlines = lines_to_nums(lines)
+lines_as_nums = lines_to_nums(lines)
 
 
 def part1():
