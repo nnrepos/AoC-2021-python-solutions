@@ -2,19 +2,20 @@ from utils.utils import *
 
 lines = get_input(__file__)
 slines = lines.splitlines()
+nlines = len(slines)
 lines_as_nums = lines_to_nums(lines)
+
+print(lines)
 
 
 def part1():
-    ans = 0
 
-    return ans
+    return
 
 
 def part2():
-    ans = 0
 
-    return ans
+    return
 
 
 print("part1:", part1())
