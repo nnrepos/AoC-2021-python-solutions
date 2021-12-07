@@ -21,7 +21,7 @@ def get_input(filename: str):
     """get input from the advent website only if i don't have it yet"""
     # get day number from file name, using __file__
     day = str(Path(filename).stem).lstrip("0")
-    json_file = Path(INPUTS_FILE)
+    json_file = Path(__file__).parent / INPUTS_FILE
 
     if json_file.exists():
         with open(json_file) as f:

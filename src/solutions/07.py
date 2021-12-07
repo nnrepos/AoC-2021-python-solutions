@@ -3,7 +3,6 @@ from utils.utils import *
 lines = get_input(__file__)
 slines = lines.splitlines()
 nlines = len(slines)
-lines_as_nums = lines_to_nums(lines)
 
 
 def sumdiff1(count, n):

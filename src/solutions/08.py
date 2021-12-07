@@ -13,9 +13,9 @@ def part1():
     pp(0)
 
 
+# only part 1
 # def part2():
-#
-#     pass
+#     pp(0)
 
 
 print("part1:", part1())
