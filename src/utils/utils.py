@@ -1,6 +1,8 @@
-import requests
 import json
+from collections import defaultdict
 from pathlib import Path
+
+import requests
 
 YEAR = 2021
 ADVENT = f"https://adventofcode.com/{YEAR}/day/"
@@ -57,3 +59,7 @@ def lines_to_nums(lines):
     except ValueError:
         print("lines_to_nums failed")
         return None
+
+
+def d():
+    return defaultdict(int)
