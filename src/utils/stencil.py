@@ -10,13 +10,12 @@ pp(lines)
 
 
 def part1():
-    pp(0)
+    return
 
 
-# def part2():
-#
-#     pass
+def part2():
+    return
 
 
 print("part1:", part1())
-# print("part2:", part2())
+print("part2:", part2())
