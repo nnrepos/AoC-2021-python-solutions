@@ -1,8 +1,11 @@
 import json
 from collections import defaultdict
 from pathlib import Path
+from collections import deque
 
 import requests
+
+pp = print
 
 YEAR = 2021
 ADVENT = f"https://adventofcode.com/{YEAR}/day/"
