@@ -1,5 +1,4 @@
 from src.utils.utils import *
-pp = print
 
 lines = get_input(__file__)
 slines = lines.splitlines()
