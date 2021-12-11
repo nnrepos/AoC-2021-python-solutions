@@ -14,6 +14,7 @@ COOKIE = {'session': "53616c7465645f5faaedd30018cec333e9754a89e806920b830d770708
 INPUTS_FILE = "inputs.json"
 HTML_OK = 200
 HTML_NOT_FOUND = 404
+DIAG = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
 
 
 def mandist(x, y, xx, yy):
