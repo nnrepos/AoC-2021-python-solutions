@@ -1,10 +1,14 @@
 import json
-from collections import defaultdict
+from collections import defaultdict, Counter, deque
 from pathlib import Path
-from collections import deque
 
 import requests
 
+# prevent optimizations
+_ = Counter
+_ = deque
+
+# useful shortcut
 pp = print
 
 YEAR = 2021
