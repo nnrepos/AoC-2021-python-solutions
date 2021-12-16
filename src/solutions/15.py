@@ -9,7 +9,7 @@ gr = defaultdict(lambda: dict())
 dist = defaultdict(lambda: float("inf"))
 unvisited = []
 cols = 0
-rows = len(slines)
+rows = 0
 
 
 def rowcol_to_node(row, col):
@@ -23,14 +23,10 @@ def node_to_rowcol(node_id):
 def get_nei(node_id):
     my_row, my_col = node_to_rowcol(node_id)
     nei = []
-    if my_row + 1 in range(rows):
-        nei.append(rowcol_to_node(my_row + 1, my_col))
-    if my_row - 1 in range(rows):
-        nei.append(rowcol_to_node(my_row - 1, my_col))
-    if my_col + 1 in range(cols):
-        nei.append(rowcol_to_node(my_row, my_col + 1))
-    if my_col - 1 in range(cols):
-        nei.append(rowcol_to_node(my_row, my_col - 1))
+    for drow, dcol in ADJ:
+        new_row, new_col = my_row + drow, my_col + dcol
+        if new_row in range(rows) and new_col in range(cols):
+            nei.append(rowcol_to_node(new_row, new_col))
 
     return nei
 
@@ -39,23 +35,25 @@ def dijkstra(start):
     global unvisited
     curr = start
     while curr is not None:
+        my_dist = dist[curr]
+
         for nei in get_nei(curr):
-            if nei in unvisited:
-                dist[nei] = min(dist[nei], dist[curr] + gr[curr][nei])
+            new_dist = my_dist + gr[curr][nei]
+            old_dist = dist[nei]
+            if new_dist < old_dist:
+                dist[nei] = new_dist
+                heappush(unvisited, (new_dist, nei))
 
         if unvisited:
-            curr = unvisited[0]
-            for node in unvisited:
-                if dist[node] < dist[curr]:
-                    curr = node
+            curr_dist, curr = heappop(unvisited)
 
-            if dist[curr] == float("inf"):
+            if curr_dist == float("inf"):
                 print("dijkstra inf")
                 return
+
             if node_to_rowcol(curr) == (rows - 1, cols - 1):
-                print("dijkstra dest")
+                # print("dijkstra dest")
                 return
-            unvisited.remove(curr)
         else:
             print("dijkstra all")
             curr = None
@@ -63,20 +61,24 @@ def dijkstra(start):
 
 def part1():
     global rows, cols, unvisited, gr, dist
+
+    gr = defaultdict(lambda: dict())
+    dist = defaultdict(lambda: float("inf"))
+    unvisited = []
+    heapify(unvisited)
+    rows = len(slines)
+
     for row, ll in enumerate(slines):
         cols = len(ll)
         for col, w in enumerate(ll):
             weight = int(w)
             node_id = row * len(ll) + col
-            unvisited.append(node_id)
-            if col - 1 in range(cols):
-                gr[rowcol_to_node(row, col - 1)][node_id] = weight
-            if col + 1 in range(cols):
-                gr[rowcol_to_node(row, col + 1)][node_id] = weight
-            if row - 1 in range(rows):
-                gr[rowcol_to_node(row - 1, col)][node_id] = weight
-            if row + 1 in range(rows):
-                gr[rowcol_to_node(row + 1, col)][node_id] = weight
+            unvisited.append((dist[node_id], node_id))
+
+            for drow, dcol in ADJ:
+                new_row, new_col = row + drow, col + dcol
+                if new_row in range(rows) and new_col in range(cols):
+                    gr[rowcol_to_node(new_row, new_col)][node_id] = weight
 
     dist[rowcol_to_node(0, 0)] = 0
 
@@ -86,7 +88,49 @@ def part1():
 
 
 def part2():
-    return
+    global rows, cols, unvisited, gr, dist
+
+    gr = defaultdict(lambda: dict())
+    dist = defaultdict(lambda: float("inf"))
+    unvisited = []
+    heapify(unvisited)
+    rows = len(slines)
+
+    newslines = d()
+    for row, ll in enumerate(slines):
+        cols = len(ll)
+        for col, w in enumerate(ll):
+            w = int(w)
+            for mrow in range(5):
+                for mcol in range(5):
+                    newslines[(row + mrow * cols, col + mcol * rows)] = str(((w + mrow + mcol - 1) % 9) + 1)
+
+    rows *= 5
+    cols *= 5
+    newlines = []
+    for row in range(rows):
+        newline = []
+        for col in range(cols):
+            newline.append(newslines[(row, col)])
+        newlines.append("".join(newline))
+
+    for row, ll in enumerate(newlines):
+        cols = len(ll)
+        for col, w in enumerate(ll):
+            weight = int(w)
+            node_id = row * len(ll) + col
+            unvisited.append((dist[node_id], node_id))
+
+            for drow, dcol in ADJ:
+                new_row, new_col = row + drow, col + dcol
+                if new_row in range(rows) and new_col in range(cols):
+                    gr[rowcol_to_node(new_row, new_col)][node_id] = weight
+
+    dist[rowcol_to_node(0, 0)] = 0
+
+    dijkstra(rowcol_to_node(0, 0))
+
+    return dist[rowcol_to_node(rows - 1, cols - 1)]
 
 
 print("part1:", part1())

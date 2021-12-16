@@ -1,24 +1,25 @@
 import json
 from collections import defaultdict, Counter, deque
+from functools import reduce
+from heapq import heapify, heappush, heappop
 from pathlib import Path
-
+from src.utils.cookie import COOKIE
 import requests
 
 # prevent optimizations
-_ = Counter
-_ = deque
+_ = (Counter, deque, reduce, heapify, heappush, heappop)
 
 # useful shortcut
 pp = print
 
 YEAR = 2021
 ADVENT = f"https://adventofcode.com/{YEAR}/day/"
-# don't use my cookie please :)
-COOKIE = {'session': "53616c7465645f5faaedd30018cec333e9754a89e806920b830d770708830b9bba8ea85d3c33e9d567d6bef840fe0ce7"}
+
 INPUTS_FILE = "inputs.json"
 HTML_OK = 200
 HTML_NOT_FOUND = 404
 DIAG = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+ADJ = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
 
 def mandist(x, y, xx, yy):
@@ -65,7 +66,6 @@ def lines_to_nums(lines):
     try:
         return [int(x) for x in lines.splitlines()]
     except ValueError:
-        print("lines_to_nums failed")
         return None
 
 
