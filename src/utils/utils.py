@@ -3,11 +3,14 @@ from collections import defaultdict, Counter, deque
 from functools import reduce
 from heapq import heapify, heappush, heappop
 from pathlib import Path
-from src.utils.cookie import COOKIE
+
 import requests
+from parse import parse
+
+from src.utils.cookie import COOKIE
 
 # prevent optimizations
-_ = (Counter, deque, reduce, heapify, heappush, heappop)
+_ = (Counter, deque, reduce, heapify, heappush, heappop, parse)
 
 # useful shortcut
 pp = print
