@@ -21,8 +21,9 @@ ADVENT = f"https://adventofcode.com/{YEAR}/day/"
 INPUTS_FILE = "inputs.json"
 HTML_OK = 200
 HTML_NOT_FOUND = 404
-DIAG = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
 ADJ = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+DIAG = [(-1, -1), (-1, 1), (1, -1), (1, 1)]
+AROUND = ADJ + DIAG
 
 
 def mandist(x, y, xx, yy):
