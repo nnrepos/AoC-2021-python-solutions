@@ -3,6 +3,7 @@ from collections import defaultdict, Counter, deque
 from functools import reduce
 from heapq import heapify, heappush, heappop
 from pathlib import Path
+from math import sqrt
 
 import requests
 from parse import parse
@@ -28,6 +29,14 @@ AROUND = ADJ + DIAG
 
 def mandist(x, y, xx, yy):
     return abs(x - xx) + abs(y - yy)
+
+
+def mandist3d(x, y, z, xx, yy, zz):
+    return abs(x - xx) + abs(y - yy) + abs(z - zz)
+
+
+def dist3d(x, y, z, xx, yy, zz):
+    return sqrt((x - xx) ** 2 + (y - yy) ** 2 + (z - zz) ** 2)
 
 
 def get_input(filename: str):
